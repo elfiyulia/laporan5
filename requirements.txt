@@ -1,9 +1,6 @@
 streamlit
-ultralytics==8.2.28
-opencv-python-headless==4.8.1.78
-tensorflow-cpu==2.12.0
+ultralytics
+tensorflow
+opencv-python-headless
 Pillow
 numpy
-h5py
-protobuf
-pygobject
