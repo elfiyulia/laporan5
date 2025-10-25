@@ -202,7 +202,7 @@ if uploaded:
         arr = np.array(small).reshape(-1,3)
         uniq, counts = np.unique((arr//32)*32, axis=0, return_counts=True)
         top = uniq[np.argsort(-counts)[:5]]
-        st.write("🌈 Warna dominan:")
+        st.write("Warna dominan:")
         cols = st.columns(5)
         for i,c in enumerate(top):
             hexc = '#%02x%02x%02x'%tuple(c)
