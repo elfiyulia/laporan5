@@ -44,9 +44,12 @@ st.markdown("""
     margin-top:10px;
 }
 footer {
-    text-align:center;
-    margin-top:40px;
-    opacity:0.9;
+    position: fixed;
+    bottom: 10px;
+    left: 15px;
+    color: white;
+    font-size: 14px;
+    opacity: 0.85;
 }
 </style>
 """, unsafe_allow_html=True)
