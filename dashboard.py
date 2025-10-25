@@ -2,21 +2,12 @@ import streamlit as st
 import numpy as np
 from PIL import Image
 from ultralytics import YOLO
-import tensorflow as tf
 import cv2
 import os
 
 # ==============================
-# LOAD MODEL
+# LOAD YOLO MODEL SAJA
 # ==============================
-
-# Load klasifikasi .h5
-classifier_model_path = "model/elfi_Laporan_2.h5"
-classifier_model = None
-if os.path.exists(classifier_model_path):
-    classifier_model = tf.keras.models.load_model(classifier_model_path)
-
-# Load YOLO .pt
 yolo_model_path = "model/Elfii_Laporan_4.pt"
 yolo_model = None
 if os.path.exists(yolo_model_path):
@@ -61,7 +52,7 @@ with col2:
 # SIDEBAR
 # ==============================
 st.sidebar.title("⚙ Panel Kontrol")
-mode = st.sidebar.selectbox("Mode Analisis:", ["Klasifikasi", "Deteksi (YOLO)"])
+mode = st.sidebar.selectbox("Mode Analisis:", ["Deteksi (YOLO)"])
 
 # ==============================
 # UPLOAD IMAGE
@@ -72,25 +63,7 @@ if uploaded:
     img = Image.open(uploaded)
     st.image(img, caption="Gambar Terunggah", use_column_width=True)
 
-    # Convert numpy
     img_np = np.array(img)
-
-    # ==============================
-    # KLASIFIKASI
-    # ==============================
-    if mode == "Klasifikasi":
-        if classifier_model:
-            resized = cv2.resize(img_np, (224,224))
-            normalized = resized.reshape(1,224,224,3) / 255.0
-            preds = classifier_model.predict(normalized)
-
-            labels = ["Bike","Car","Motorcycle","Plane","Ship",
-                      "Semprong","Grontol","Lanting","Lumpia","Putu Ayu","Wajik"]
-
-            pred_idx = np.argmax(preds)
-            st.success(f"✅ Prediksi: **{labels[pred_idx]}**")
-        else:
-            st.error("❌ Model klasifikasi tidak ditemukan!")
 
     # ==============================
     # DETEKSI YOLO
