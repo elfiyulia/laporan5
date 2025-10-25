@@ -210,4 +210,4 @@ else:
 # =====================
 # FOOTER
 # =====================
-st.markdown("<footer>📌 Vision Inspector — oleh Elfi Yulia</footer>", unsafe_allow_html=True)
+st.markdown("<footer>📌 Dashboard — oleh Elfi Yulia</footer>", unsafe_allow_html=True)
