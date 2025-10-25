@@ -27,7 +27,7 @@ st.set_page_config(
 st.markdown("""
 <style>
 .stApp {
-    background: linear-gradient(135deg, #001119 0%, #00334d 50%, #c6953f 100%);
+    background: linear-gradient(135deg, #ffb3c6 0%, #ff7eb9 40%, #ff5196 100%);
     color: #fff;
     font-family: 'Poppins', sans-serif;
 }
@@ -50,9 +50,12 @@ st.markdown("""
     transform: scale(1.03);
 }
 footer {
-    text-align:center;
-    color:#ffec99;
-    margin-top:40px;
+    position: fixed;
+    left: 10px;
+    bottom: 10px;
+    color:#fff;
+    font-size: 14px;
+    opacity: 0.85;
 }
 </style>
 """, unsafe_allow_html=True)
@@ -212,4 +215,5 @@ else:
 # ======================
 # FOOTER
 # ======================
-st.markdown("<footer>🚗🍪 Vision Dashboard — by Elfi 💜</footer>", unsafe_allow_html=True)
+st.markdown("<footer> Dashboard — by Elfi Yulia</footer>", unsafe_allow_html=True)
+
