@@ -136,7 +136,7 @@ def predict_image(model, pil_img):
 # ======================
 # UI HEADER
 # ======================
-st.markdown("<div class='title-box'><h1>🚗🍪 Vision Dashboard</h1><h4>AI Analisis Kendaraan & Makanan Tradisional</h4></div>", unsafe_allow_html=True)
+st.markdown("<div class='title-box'><h1>Vision Dashboard</h1><h4>Analisis Kendaraan & Makanan Tradisional</h4></div>", unsafe_allow_html=True)
 
 # Sidebar
 st.sidebar.header("⚙️ Pengaturan")
@@ -215,5 +215,6 @@ else:
 # ======================
 # FOOTER
 # ======================
-st.markdown("<footer> Dashboard — by Elfi Yulia</footer>", unsafe_allow_html=True)
+st.markdown("<footer>📌 Dashboard — by Elfi Yulia</footer>", unsafe_allow_html=True)
+
 
