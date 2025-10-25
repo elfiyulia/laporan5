@@ -132,7 +132,7 @@ def classify(model, image):
 # =====================
 # HEADER UI
 # =====================
-st.markdown("<div class='header-box'><h1>🚗 Vision Inspector Dashboard</h1><h5>Analisis Kendaraan & Jajanan Tradisional</h5></div>", unsafe_allow_html=True)
+st.markdown("<div class='header-box'><h1>Aplikasi Klasifikasi Gambar dan Deteksi Objek</h1><h5>Kendaraan & Jajanan Tradisional</h5></div>", unsafe_allow_html=True)
 
 # =====================
 # SIDEBAR
