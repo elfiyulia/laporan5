@@ -53,8 +53,8 @@ col1, col2 = st.columns([1,5])
 
 with col2:
     st.markdown('<div class="header-box">', unsafe_allow_html=True)
-    st.markdown('<p class="title">🚗 Vision Inspector Dashboard</p>', unsafe_allow_html=True)
-    st.markdown('<p class="subtitle">Analisis Kendaraan & Jajanan Tradisional</p>', unsafe_allow_html=True)
+    st.markdown('<p class="title">Klasifikasi Gambar dan Deteksi Objek</p>', unsafe_allow_html=True)
+    st.markdown('<p class="subtitle">Kendaraan & Jajanan Tradisional</p>', unsafe_allow_html=True)
     st.markdown('</div>', unsafe_allow_html=True)
 
 # ==============================
