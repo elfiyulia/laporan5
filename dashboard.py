@@ -1,84 +1,80 @@
 import streamlit as st
-from PIL import Image
 import numpy as np
-import cv2
-import os
-import tensorflow as tf
+from PIL import Image
 from ultralytics import YOLO
+import tensorflow as tf
 
-# =============================================
+# ==============================================
+# PATH MODEL
+# ==============================================
+clf_path = "model/elfi_Laporan 2.h5"         # model klasifikasi
+yolo_path = "model/Elfii_Laporan 4.pt"       # model YOLO
+
+# ==============================================
 # LOAD MODEL KLASIFIKASI
-# =============================================
-
-clf_path = "model_klasifikasi.h5"
-
+# ==============================================
 try:
     classifier = tf.keras.models.load_model(clf_path)
-    clf_status = True
-except:
+    clf_loaded = True
+except Exception as e:
     classifier = None
-    clf_status = False
+    clf_loaded = False
+    st.write(e)
 
-# =============================================
+# ==============================================
 # LOAD MODEL YOLO
-# =============================================
-
-yolo_path = "yolo.pt"
-
+# ==============================================
 try:
     yolo_model = YOLO(yolo_path)
-    yolo_status = True
-except:
+    yolo_loaded = True
+except Exception as e:
     yolo_model = None
-    yolo_status = False
+    yolo_loaded = False
+    st.write(e)
 
-# =============================================
+# ==============================================
 # STREAMLIT UI
-# =============================================
-
+# ==============================================
 st.sidebar.title("⚙ Panel Kontrol")
+mode = st.sidebar.selectbox("Mode Analisis:", ["Klasifikasi", "Deteksi YOLO"])
 
-mode = st.sidebar.selectbox("Mode Analisis:", ["Klasifikasi", "Deteksi (YOLO)"])
-
-uploaded_image = st.file_uploader("Upload Gambar", type=["jpg", "png", "jpeg"])
+uploaded_image = st.file_uploader("Upload gambar", type=["jpg", "jpeg", "png"])
 
 if uploaded_image:
     img = Image.open(uploaded_image)
     st.image(img, caption="Gambar Input", width=500)
 
-# =============================================
+# ==============================================
 # MODE KLASIFIKASI
-# =============================================
-
+# ==============================================
 if mode == "Klasifikasi":
 
-    if not clf_status:
-        st.error("❌ Classifier tidak ditemukan!")
+    if not clf_loaded:
+        st.error("❌ Model klasifikasi TIDAK ditemukan!")
     else:
-        st.success("✅ Classifier loaded!")
+        st.success("✅ Model klasifikasi berhasil diload!")
 
-        # PREPROCESS
+        # Pre-process gambar
         image = img.resize((224,224))
         image = np.array(image) / 255.0
         image = np.expand_dims(image, axis=0)
 
-        prediction = classifier.predict(image)[0]
-        class_id = np.argmax(prediction)
+        pred = classifier.predict(image)[0]
+        kelas = np.argmax(pred)
 
-        st.write(f"Hasil Prediksi: {class_id}")
+        st.info(f"Hasil Prediksi Kelas: {kelas}")
 
-# =============================================
+# ==============================================
 # MODE YOLO DETEKSI
-# =============================================
+# ==============================================
+elif mode == "Deteksi YOLO":
 
-elif mode == "Deteksi (YOLO)":
-
-    if not yolo_status:
-        st.error("❌ YOLO tidak tersedia!")
+    if not yolo_loaded:
+        st.error("❌ Model YOLO TIDAK ditemukan!")
     else:
-        st.success("✅ YOLO loaded!")
+        st.success("✅ Model YOLO berhasil diload!")
 
         result = yolo_model.predict(np.array(img))
-        annotated_frame = result[0].plot()
+        annotated = result[0].plot()
 
-        st.image(annotated_frame, caption="Hasil Deteksi", width=500)
+        st.image(annotated, caption="Hasil Deteksi YOLO", width=500)
